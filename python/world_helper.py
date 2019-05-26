@@ -1,12 +1,5 @@
 import random
-
-# All the possible states of a cell
-# TODO: Refactor so this isn't duped
-alive = 'a'
-dead = '.'
-dying = 'd'
-being_born = 'b'
-
+import cell_states
 
 # Randomly generate a starting game state.
 def generateSeed(width, height):
@@ -22,9 +15,9 @@ def generateSeed(width, height):
             # should be alive or not. Make it relatively rare for life to occur.
             val = random.uniform(0, 1)
             if val >= .90:
-                world_row.append(alive)
+                world_row.append(cell_states.alive)
             else:
-                world_row.append(dead)
+                world_row.append(cell_states.dead)
 
         # We've got a row, append it to the world.
         world.append(world_row)
@@ -69,31 +62,35 @@ def getNeighbors(world, cell_row, cell_col):
 
     return neighbors
 
+
+# Determines the state of a specific cell based on it's current state and the
+# state of it's neighbors. This is where the rules live.
+#
+# Rules:
+#   if the current cell is alive then...
+#       if it has fewer than 2 lives neighbours it dies
+#       if it has 2 OR 3 live neighbours it remains alive, nothing changes
+#       if it has > 3 live neighbors it dies
+#   if the current cell is dead then...
+#       if there are exactly 3 live neighbours then it becomes alive otherwise it stays dead
 def determineCellState(neighbors, current_state):
-    # if the current cell is alive then...
-    #   if it has fewer than 2 lives neighbours it dies
-    #   if it has 2 OR 3 live neighbours it remains alive, nothing changes
-    #   if it has > 3 live neighbors it dies
-    # if the current cell is dead then...
-    #   if there are exactly 3 live neighbours then it becomes alive
-    #   other wise it stays dead
 
     alive_neighbors = 0
-    previously_alive_states = [dying, alive]
+    previously_alive_states = [cell_states.dying, cell_states.alive]
     for neighbor_state in neighbors:
         if neighbor_state in previously_alive_states: alive_neighbors += 1
 
     new_state = current_state
     if current_state in previously_alive_states:
         if alive_neighbors < 2:
-            new_state = dying
+            new_state = cell_states.dying
         if alive_neighbors > 3:
-            new_state = dying
+            new_state = cell_states.dying
     else:
-        if alive_neighbors == 3: new_state = being_born
+        if alive_neighbors == 3: new_state = cell_states.being_born
     
-
     return new_state
+
 
 # Updates the world array based on the rules of the game
 def updateWorld(world):
@@ -105,6 +102,8 @@ def updateWorld(world):
 
     for row in range(len(world)):
         for col in range(len(world[row])):
-            if world[row][col] == dying: world[row][col] = dead
-            elif world[row][col] == being_born: world[row][col] = alive
+            if world[row][col] == cell_states.dying:
+                world[row][col] = cell_states.dead
+            elif world[row][col] == cell_states.being_born:
+                world[row][col] = cell_states.alive
 

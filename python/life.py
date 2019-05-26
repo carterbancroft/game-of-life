@@ -3,6 +3,7 @@
 import pygame
 import random
 
+import cell_states
 import world_helper
 
 # Variables for window size and cell counts etc
@@ -12,22 +13,13 @@ cell_size = 10
 cell_count_across = int(screen_width / cell_size)
 cell_count_down = int(screen_height / cell_size)
 
-print(f'cell_count_across {cell_count_across}')
-print(f'cell_count_down {cell_count_down}')
-
-# All the possible states of a cell
-alive = 'a'
-dead = '.'
-dying = 'd'
-being_born = 'b'
-
 
 # Renders a specific world state to the window.
 def renderWorld(win, world):
     # Iterate over our 2D array and draw circles where there is an Alive state.
     for row in range(len(world)):
         for col in range(len(world[row])):
-            if world[row][col] == dead:
+            if world[row][col] == cell_states.dead:
                 # This cell is dead, move along.
                 continue
 
@@ -62,7 +54,7 @@ def main():
         # Clear the screen
         win.fill((0, 0, 0))
 
-        # Update the world based on the rules for the next tick
+        # Update the world object based on the rules for the next tick
         world_helper.updateWorld(world)
 
         # Render it
@@ -73,5 +65,5 @@ def main():
 
     pygame.quit()
 
-# Entrypoint.
+# Entrypoint
 main()
