@@ -1,65 +1,41 @@
 # https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 
+import pygame
 import random
-from graphics import *
+
+import world_helper
 
 # Variables for window size and cell counts etc
-screen_width = 800
-screen_height = 800
+# TODO Make it so unequal width/height ratios work
+screen_width = 950
+screen_height = 950
 cell_size = 10
 cell_count_across = int(screen_width / cell_size)
 cell_count_down = int(screen_height / cell_size)
 
-print(f'cell_count_across {cell_count_across}')
-print(f'cell_count_down {cell_count_down}')
+#print(f'cell_count_across {cell_count_across}')
+#print(f'cell_count_down {cell_count_down}')
 
 # All the possible states of a cell
 alive = 'a'
-dead = ' '
+dead = '.'
 dying = 'd'
 being_born = 'b'
 
-# Randomly generate a starting game state.
-def generateWorld():
-    # The world will be stored in a 2D array where each space in the array
-    # represents a specific cell at a specific point in space. To start, the
-    # cell can either be alive or dead. This will kick off the game
-    world = []
-
-    for i in range(cell_count_down):
-        world_row = []
-        for j in range(cell_count_across):
-            # Use a random number generator to help us determine whether a cell
-            # should be alive or not. Make it relatively rare for life to occur.
-            val = random.randint(1, 10001)
-            if val >= 9900:
-                world_row.append(alive)
-            else:
-                world_row.append(dead)
-
-        # We've got a row, append it to the world.
-        world.append(world_row)
-
-    # Simply return our world representation. Rendering will be handled later.
-    return world
 
 # Renders a specific world state to the window.
 def renderWorld(win, world):
-    # Just some vars to give me insight.
-    alive_count = 0
-    dead_count = 0
+    #alive_count = 0
+    #dead_count = 0
 
     # Iterate over our 2D array and draw circles where there is an Alive state.
     for row in range(len(world)):
         for cell in range(len(world[row])):
             if world[row][cell] == dead:
                 # This cell is dead, move along.
-                dead_count += 1
-                print('dead')
+                #dead_count += 1
+                #print('dead')
                 continue
-
-            # Nice this cell is alive, render.
-            print('alive')
 
             # Determine the radius of the circle we'll draw based on the calc'd
             # size of the cell.
@@ -69,31 +45,41 @@ def renderWorld(win, world):
             center_x = row * cell_size + radius
             center_y = cell * cell_size + radius
 
-            # Define the point where the center of the circle will be rendered.
-            point = Point(center_x, center_y)
+            pygame.draw.circle(win, (0, 0, 255), (center_x, center_y), radius)
 
-            # Render our circle (the creature) in the cell. Color it green.
-            creature = Circle(point, radius)
-            creature.setFill('green')
-            creature.draw(win)
+            #alive_count += 1
 
-            alive_count += 1
+    #print(f'alive: {alive_count}')
+    #print(f'dead: {dead_count}')
 
-    print(alive_count)
-    print(dead_count)
 
 # The main function, which handles setting up the window and calling all other
 # functions.
 def main():
-    win = GraphWin('Life', screen_width, screen_height)
-    win.setBackground('black')
+    pygame.init()
 
-    world = generateWorld()
-    renderWorld(win, world)
+    win = pygame.display.set_mode((screen_width, screen_height))
+    pygame.display.set_caption('Life')
 
-    # Shutdown upon mouse click.
-    win.getMouse()
-    win.close()
+    world = world_helper.generateSeed(cell_count_across, cell_count_down)
+
+    run = True
+    while run:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+
+        # Render the current world state
+        win.fill((0, 0, 0))
+        renderWorld(win, world)
+        pygame.display.update()
+
+        # Update the world based on the rules for the next tick
+        world_helper.updateWorld(world)
+
+        pygame.time.delay(10)
+
+    pygame.quit()
 
 # Entrypoint.
 main()
