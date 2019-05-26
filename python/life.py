@@ -91,8 +91,6 @@ def main():
     world = generateWorld()
     renderWorld(win, world)
 
-    generateWorld()
-
     # Shutdown upon mouse click.
     win.getMouse()
     win.close()
