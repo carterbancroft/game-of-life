@@ -1,5 +1,5 @@
 # Entrypoint file for Conway's Game of Life implementation. Handles running
-# the game and and rendering to the screen using pygame.
+# the game and rendering to the screen using pygame.
 #
 # https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 
