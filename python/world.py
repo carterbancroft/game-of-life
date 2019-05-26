@@ -1,4 +1,10 @@
+# Handles logic for manipulating and generating the world array. Including the
+# rules of Life.
+
+# 3rd party
 import random
+
+# Project level
 import cell_states
 
 # Randomly generate a starting game state.

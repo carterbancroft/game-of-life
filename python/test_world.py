@@ -1,5 +1,12 @@
+# 3rd party
 import unittest
-import world_helper
+
+# Package level
+import world
+
+# Note that I'm not using cell_states here... If I change a state value that
+# could break all these tests. However I think the current way reads better.
+# Leaving it as is for now.
 
 class GetNeighbors(unittest.TestCase):
     def test_center_cell_surrounded_by_dead(self):

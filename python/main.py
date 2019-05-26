@@ -1,14 +1,19 @@
+# Entrypoint file for Conway's Game of Life implementation. Handles running
+# the game and and rendering to the screen using pygame.
+#
 # https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 
+# 3rd party
 import pygame
 import random
 
+# Project level
 import cell_states
-import world_helper
+import world as world_helper
 
 # Variables for window size and cell counts etc
-screen_width = 1400
-screen_height = 800
+screen_width = 1000
+screen_height = 700
 cell_size = 10
 cell_count_across = int(screen_width / cell_size)
 cell_count_down = int(screen_height / cell_size)
