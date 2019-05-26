@@ -20,8 +20,8 @@ def generateSeed(width, height):
         for j in range(width):
             # Use a random number generator to help us determine whether a cell
             # should be alive or not. Make it relatively rare for life to occur.
-            val = random.randint(1, 10001)
-            if val >= 8500:
+            val = random.uniform(0, 1)
+            if val >= .90:
                 world_row.append(alive)
             else:
                 world_row.append(dead)
