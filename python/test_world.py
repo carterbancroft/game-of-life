@@ -2,7 +2,7 @@
 import unittest
 
 # Package level
-import world
+import world as world_helper
 
 # Note that I'm not using cell_states here... If I change a state value that
 # could break all these tests. However I think the current way reads better.

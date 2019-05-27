@@ -13,7 +13,7 @@ import world as world_helper
 
 # Consts
 tick_delay = 10
-screen_width = 1000
+screen_width = 1100
 screen_height = 700
 cell_color = (0, 175, 50) # Cell color in RGB
 cell_size = 10
