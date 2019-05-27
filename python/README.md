@@ -5,12 +5,18 @@ Python 3.x
 
 Pygame: `python3 -m pip install pygame`
 
-## Running it
+## Running the game
 From the root of the repository...
 ```
 $ cd python
 $ python3 main.py
 ```
+
+## Running tests
+```
+$ python3 -m unittest test_world
+```
+Run individual tests like `python3 -m unittest test_world.GetNeighbors.test_top_left_cell`
 
 ## Tweaking it
 There are a few variables you can modify to get different, sometimes more interesting, results within this implementation of Life.
