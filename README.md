@@ -8,3 +8,5 @@ For more information on what the Game Of Life is see [https://en.wikipedia.org/w
 ### Current implementations
 - [JavaScript](https://github.com/carterbancroft/game-of-life/tree/master/js)
 - [Python](https://github.com/carterbancroft/game-of-life/tree/master/python)
+
+![](screenshots/python_screenshot.png)
