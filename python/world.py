@@ -14,13 +14,18 @@ def generateSeed(width, height):
     # cell can either be alive or dead. This will kick off the game
     world = []
 
+    # Tweak this number to increase or decrease the chances that a given cell
+    # in the seed will be alive or dead. More life as it approaches 0 and more
+    # death as it approaches 1.
+    life_threshold = .80
+
     for i in range(height):
         world_row = []
         for j in range(width):
             # Use a random number generator to help us determine whether a cell
             # should be alive or not. Make it relatively rare for life to occur.
             val = random.uniform(0, 1)
-            if val >= .90:
+            if val >= life_threshold:
                 world_row.append(cell_states.alive)
             else:
                 world_row.append(cell_states.dead)

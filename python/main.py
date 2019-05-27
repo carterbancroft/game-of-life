@@ -11,9 +11,11 @@ import random
 import cell_states
 import world as world_helper
 
-# Variables for window size and cell counts etc
+# Consts
+tick_delay = 10
 screen_width = 1000
 screen_height = 700
+cell_color = (0, 175, 50) # Cell color in RGB
 cell_size = 10
 cell_count_across = int(screen_width / cell_size)
 cell_count_down = int(screen_height / cell_size)
@@ -36,7 +38,7 @@ def renderWorld(win, world):
             center_x = col * cell_size + radius
             center_y = row * cell_size + radius
 
-            pygame.draw.circle(win, (0, 0, 255), (center_x, center_y), radius)
+            pygame.draw.circle(win, cell_color, (center_x, center_y), radius)
 
 
 # The main function, which handles setting up the window and calling all other
@@ -66,7 +68,7 @@ def main():
         renderWorld(win, world)
 
         pygame.display.update()
-        pygame.time.delay(10)
+        pygame.time.delay(tick_delay)
 
     pygame.quit()
 
