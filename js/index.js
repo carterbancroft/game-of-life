@@ -11,14 +11,21 @@ const dead = ' '
 const dying = 'd'
 const being_born = 'b'
 
+
 function generateWorld() {
   let world = []
   let options = [alive, dead]
+
+  // Tweak this number to increase or decrease the chances that a given cell
+  // in the seed will be alive or dead. More life as it approaches 0 and more
+  // death as it approaches 1.
+  const life_threshold = 0.90
+
   for (let i = 0; i < width; i++) {
     let new_arr = []
     for (let j = 0; j < height; j++) {
       let r = Math.random()
-      if (r >= 0.96) r = 0
+      if (r >= life_threshold) r = 0
       else r = 1
       new_arr.push(options[r])
     }
@@ -27,6 +34,7 @@ function generateWorld() {
 
   return world
 }
+
 
 function getNeighbors(world, cell_x, cell_y) {
   // Start at the top left corner of our 3x3 grid
@@ -126,6 +134,7 @@ function updateWorld(world) {
   }
 }
 
+
 function printWorld(world) {
   for (let i = 0; i < width; i++) {
     for (let j = 0; j < height; j++) {
@@ -138,8 +147,8 @@ function printWorld(world) {
   buffer.draw()
 }
 
+// Entrypoint.
 let world = generateWorld()
-//printWorld(world)
 
 function run() {
   setTimeout(() => {
