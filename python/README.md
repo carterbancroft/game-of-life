@@ -4,6 +4,7 @@
 Python 3.x
 
 Pygame: `python3 -m pip install pygame`
+
 PyYAML: `python3 -m pip install yaml`
 
 ## Running the game
