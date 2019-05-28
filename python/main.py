@@ -103,6 +103,7 @@ def main():
 
     color_type = cfg['starting_color_type']
 
+    generation_count = 0
     run = True
     while run:
         # Events listener. Right now it's only listening for QUIT
@@ -124,6 +125,11 @@ def main():
 
         pygame.display.update()
         pygame.time.delay(cfg['tick_delay'])
+
+        generation_count += 1
+
+    print(f'\nThis Game of Life ran for {generation_count} generations.')
+    print('Thanks for playing. Goodbye.')
 
     pygame.quit()
 

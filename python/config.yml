@@ -1,0 +1,7 @@
+cell_size: 10
+tick_delay: 50
+screen_width: 1100
+screen_height: 700
+seed_modifier: .80
+starting_color_type: 0
+
