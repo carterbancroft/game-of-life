@@ -28,4 +28,8 @@ There are a few config values you can modify to get different, sometimes more in
 - `seed_modifier` (float) increases or decreases the chances of a given cell being alive when the game starts. More cells will be dead in the seed as the number approaches 1 and more will be alive as is approaches 0.
 
 **In [main.py](https://github.com/carterbancroft/game-of-life/blob/master/python/main.py)**
-- `cell_color` (pygame color) adjusts the color or the alive cells
+- `cell_color` (pygame color) adjusts the color of the alive cells
+
+## TODO
+- Implement the ability to draw a starting state in addition to using a random seed.
+- Make it so the edges of the world are connected to the opposite edges.
