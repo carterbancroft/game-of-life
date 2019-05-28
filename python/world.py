@@ -2,10 +2,15 @@
 # rules of Life.
 
 # 3rd party
+import yaml
 import random
 
 # Project level
 import cell_states
+
+# Import configuration
+with open('config.yml', 'r') as the_yaml:
+    cfg = yaml.safe_load(the_yaml)
 
 # Randomly generate a starting game state.
 def generateSeed(width, height):
@@ -17,7 +22,7 @@ def generateSeed(width, height):
     # Tweak this number to increase or decrease the chances that a given cell
     # in the seed will be alive or dead. More life as it approaches 0 and more
     # death as it approaches 1.
-    life_threshold = .80
+    life_threshold = cfg['seed_modifier']
 
     for i in range(height):
         world_row = []
